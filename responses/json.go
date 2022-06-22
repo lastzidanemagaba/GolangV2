@@ -14,8 +14,7 @@ type meta_resperr struct {
 }
 
 type Response2 struct {
-	Meta meta_resp `json:"meta"`
-	//Data []string  `json:"data"`
+	Meta meta_resp   `json:"meta"`
 	Data interface{} `json:"data"`
 }
 

@@ -14,5 +14,7 @@ func route() {
 	router.POST("/auth/login", controller.Login)
 	router.POST("/auth/register", controller.CreateUser)
 	router.POST("/auth/logout", middlewares.TokenAuthMiddleware(), controller.LogOut)
-	router.POST("/todo", middlewares.TokenAuthMiddleware(), controller.CreateTodo)
+
+	// NOT USED
+	//router.POST("/todo", middlewares.TokenAuthMiddleware(), controller.CreateTodo)
 }

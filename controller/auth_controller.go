@@ -13,9 +13,11 @@ import (
 )
 
 func Login(c *gin.Context) {
-	var u model.User
+	var u model.UserLogin
+
 	if err := c.ShouldBindJSON(&u); err != nil {
-		c.JSON(http.StatusNotFound, responses.ErrorResponses(http.StatusNotFound, 1, "Error", err.Error()))
+		c.JSON(http.StatusNotFound, responses.ErrorResponses(http.StatusNotFound, 1, "Error", "Invalid JSON"))
+		c.Abort()
 		return
 	}
 
@@ -46,8 +48,9 @@ func Login(c *gin.Context) {
 		Email    string `json:"email"`
 		Nickname string `json:"nickname"`
 		Token    string `json:"token"`
+		Alergi   string `json:"alergi"`
 	}
-	res_data := data_resp{ID: user.ID, Email: user.Email, Nickname: user.Nickname, Token: token}
+	res_data := data_resp{ID: user.ID, Email: user.Email, Alergi: user.Alergi, Token: token}
 
 	c.JSON(http.StatusBadRequest, responses.SuccesResponses(http.StatusOK, 0, "Success", res_data))
 

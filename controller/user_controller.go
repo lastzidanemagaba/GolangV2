@@ -26,8 +26,7 @@ func CreateUser(c *gin.Context) {
 		ID       uint64 `json:"id"`
 		Email    string `json:"email"`
 		Password string `json:"password"`
-		Nickname string `json:"nickname"`
 	}
-	res_data := data_resp{ID: user.ID, Email: user.Email, Password: passbeforeenc, Nickname: user.Nickname}
+	res_data := data_resp{ID: user.ID, Email: user.Email, Password: passbeforeenc}
 	c.JSON(http.StatusCreated, responses.SuccesResponses(http.StatusOK, 0, "Success", res_data))
 }

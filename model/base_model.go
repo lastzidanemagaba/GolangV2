@@ -28,6 +28,7 @@ type modelInterface interface {
 
 	//todo methods:
 	CreateTodo(*Todo) (*Todo, error)
+	FetchTodo(*Todo) (*Todo, error)
 
 	//auth methods:
 	FetchAuth(*auth.AuthDetails) (*Auth, error)

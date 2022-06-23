@@ -8,17 +8,10 @@ import (
 )
 
 type User struct {
-	ID       uint64 `gorm:"primary_key;auto_increment" json:"id"`
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
-	Nickname string `json:"nickname" binding:"required"`
-	Alergi   string `gorm:"size:100;not null;" json:"Alergi"`
-}
-
-type UserLogin struct {
 	ID                            uint64 `gorm:"primary_key;auto_increment" json:"id"`
 	Email                         string `json:"email" binding:"required"`
 	Password                      string `json:"password" binding:"required"`
+	Device_Id                     string `gorm:"size:255;not null;unique" json:"device_id"`
 	Device_Name                   string `gorm:"size:255;not null;unique" json:"Device_Name"`
 	Temp_Password                 string `gorm:"size:100;not null;" json:"Temp_Password"`
 	Name                          string `gorm:"size:100;not null;" json:"Name"`
@@ -35,7 +28,6 @@ type UserLogin struct {
 	Ktp_Image                     string `gorm:"size:100;not null;" json:"Ktp_Image"`
 	Passport_Image                string `gorm:"size:100;not null;" json:"Passport_Image"`
 	Vaccination_Certificate_Image string `gorm:"size:100;not null;" json:"Vaccination_Certificate_Image"`
-	Alergi                        string `gorm:"size:100;not null;" json:"Alergi"`
 	Verification_Token            string `gorm:"size:100;not null;" json:"Verification_Token"`
 	Verification_Token_Date       string `gorm:"size:100;not null;" json:"Verification_Token_Date"`
 	Email_Verified                string `gorm:"size:100;not null;" json:"Email_Verified"`
@@ -56,6 +48,14 @@ type UserLogin struct {
 	Notification_Channel_Id       string `gorm:"size:100;not null;" json:"Notification_Channel_Id"`
 	Group_Notification_Channel_Id string `gorm:"size:100;not null;" json:"Group_Notification_Channel_Id"`
 	Last_Premium_Date             string `gorm:"size:100;not null;" json:"Last_Premium_Date"`
+}
+
+type UserLogin struct {
+	Email       string `json:"email" binding:"required"`
+	Password    string `json:"password" binding:"required"`
+	Device_Id   string `gorm:"size:255;not null;unique" json:"device_id"`
+	Device_Name string `gorm:"size:255;not null;unique" json:"Device_Name"`
+	Lang_Code   string `gorm:"size:100;not null;" json:"Lang_Code"`
 }
 
 func (s *Server) ValidateEmail(email string) error {

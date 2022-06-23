@@ -42,3 +42,25 @@ func CreateTodo(c *gin.Context) {
 	res_data := data_resp{ID: todo.ID, UserID: todo.UserID, Title: todo.Title}
 	c.JSON(http.StatusCreated, responses.SuccesResponses(http.StatusOK, 0, "Success", res_data))
 }
+
+func FindTodo(c *gin.Context) {
+
+	var td model.Todo
+	tokenAuth, err := auth.ExtractTokenAuth(c.Request)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, responses.ErrorResponses(http.StatusUnauthorized, 1, "Error", "Unauthorized"))
+		return
+	}
+	foundAuth, err := model.Model.FetchAuth(tokenAuth)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, responses.ErrorResponses(http.StatusUnauthorized, 1, "Error", "Unauthorized"))
+		return
+	}
+	//td.UserID = foundAuth.UserID
+	todo, err := model.Model.FetchTodo(&td)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, responses.ErrorResponses(http.StatusUnauthorized, 1, "Error", err.Error()))
+		return
+	}
+
+}

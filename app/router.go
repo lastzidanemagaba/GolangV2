@@ -17,5 +17,6 @@ func route() {
 
 	// NOT USED
 	router.POST("/todo", middlewares.TokenAuthMiddleware(), controller.CreateTodo)
-	router.GET("/todo", middlewares.TokenAuthMiddleware(), controller.FindTodo)
+	router.GET("/todo", middlewares.TokenAuthMiddleware(), controller.GetTodo)
+	router.DELETE("/todo/:id", middlewares.TokenAuthMiddleware(), controller.DeleteTodo)
 }

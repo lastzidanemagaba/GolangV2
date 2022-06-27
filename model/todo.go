@@ -21,3 +21,25 @@ func (s *Server) CreateTodo(todo *Todo) (*Todo, error) {
 	}
 	return todo, nil
 }
+
+func (s *Server) GetTodo(todo *Todo) ([]Todo, error) {
+	var accs []Todo
+	res := s.DB.Debug().Find(&accs)
+
+	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	return accs, nil
+}
+
+func (s *Server) DeleteTodo(todo *Todo) ([]Todo, error) {
+	var accs []Todo
+	res := s.DB.Debug().Where("id  = ?", 1).Take(&accs).Delete(&accs)
+
+	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	return accs, nil
+}

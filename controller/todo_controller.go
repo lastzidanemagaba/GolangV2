@@ -93,7 +93,7 @@ func DeleteTodo(c *gin.Context) {
 	c.JSON(http.StatusCreated, responses.SuccesResponses(http.StatusOK, 0, "Success", todo))
 	// Get model if exist
 	db := c.MustGet("db").(*gorm.DB)
-	var book models.Task
+	var book model.Todo
 	if err := db.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Data tidak ditemukan!!"})
 		return
